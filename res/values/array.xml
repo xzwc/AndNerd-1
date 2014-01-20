@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="list_text_colors">
+        <item>@color/sun_flower</item>		
+		<item>@color/clouds</item>		
+    </array>
+    
+    <array name="list_background_colors">
+        <item>@color/midnight_blue</item>
+        <item>@color/black</item>
+    </array>
+</resources>

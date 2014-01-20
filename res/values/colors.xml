@@ -1,0 +1,25 @@
+<resources>    
+    <!-- color scheme from flat ui -->    
+    <color name="turquoise">#ff1abc9c</color>
+    <color name="green_sea">#ff16a085</color>
+    <color name="emerald">#ff2ecc71</color>
+    <color name="nephritis">#ff27ae60</color>
+    <color name="peter_river">#ff3498db</color>
+    <color name="belize_hole">#ff2980b9</color>
+    <color name="amethyst">#ff9b59b6</color>
+    <color name="wisteria">#ff8e44ad</color>
+    <color name="wet_asphalt">#ff34495e</color>
+    <color name="midnight_blue">#ff2c3e50</color>
+    <color name="sun_flower">#fff1c40f</color>
+    <color name="orange">#fff39c12</color>
+    <color name="carrot">#ffe67e22</color>
+    <color name="pumpkin">#ffd35400</color>
+    <color name="alizarin">#ffe74c3c</color>
+    <color name="pomegranate">#ffc0392b</color>
+    <color name="clouds">#ffecf0f1</color>
+    <color name="silver">#ffbdc3c7</color>
+    <color name="concrete">#ff95a5a6</color>
+    <color name="asbestos">#ff7f8c8d</color>
+    
+    <color name="black">#ff222222</color>
+</resources>
