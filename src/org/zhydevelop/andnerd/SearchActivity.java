@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.zhydevelop.andnerd.adapter.BookResultAdapter;
 import org.zhydevelop.andnerd.bean.Book;
-import org.zhydevelop.andnerd.parser.HTMLParser;
-import org.zhydevelop.andnerd.util.URLBuilder;
+import org.zhydevelop.andnerd.parser.HuiwenParser;
+import org.zhydevelop.andnerd.util.HuiwenURLBuilder;
 
 import android.app.Activity;
 import android.content.Context;
@@ -136,14 +136,14 @@ public class SearchActivity extends Activity implements OnClickListener {
 		mLoadingText.setVisibility(View.VISIBLE);
 		
 		mPage++;
-		String url = URLBuilder.search(mKeyword, mPage, mLimit);		
+		String url = HuiwenURLBuilder.search(mKeyword, mPage, mLimit);		
 		AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 		asyncHttpClient.get(url, new AsyncHttpResponseHandler() {
 		    @Override
 		    public void onSuccess(String response) {
 		    	if(mStatus == Status.CANCELLED) return;
 		    	
-		    	HTMLParser parser = new HTMLParser(response);
+		    	HuiwenParser parser = new HuiwenParser(response);
 		    	List<Book> results = parser.parseBooks();
 		    		    		
 		    	if(mPage == 1) {
@@ -153,6 +153,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 			    	//TODO
 			    	mResultAdapter = new BookResultAdapter(getApplication(), mBooks);
 			    	mCount = parser.getCount();
+					parser = null;
 			    	mCountText.setText(String.format(getString(R.string.result_sum), mCount));
 			    	listView.setAdapter(mResultAdapter);
 		    	} else {
@@ -167,8 +168,6 @@ public class SearchActivity extends Activity implements OnClickListener {
 		    	} else {
 			    	mStatus = Status.READY;
 		    	}
-
-				parser = null;
 		    }
 		    
 		    @Override

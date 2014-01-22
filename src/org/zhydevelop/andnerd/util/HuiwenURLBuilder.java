@@ -2,9 +2,11 @@ package org.zhydevelop.andnerd.util;
 
 import android.net.Uri;
 
-public class URLBuilder {
+public class HuiwenURLBuilder {
 	private final static int PER_PAGE = 20;
 	private final static int BACKTRACK_DAYS = 3;
+	
+	//TODO:
 	private final static String URL_BASE = "http://huiwen.ujs.edu.cn:8080/opac/";
 	
 	/**

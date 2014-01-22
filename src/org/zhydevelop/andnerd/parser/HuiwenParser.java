@@ -18,10 +18,10 @@ import org.zhydevelop.andnerd.bean.Book;
  * @author ChiChou
  *
  */
-public class HTMLParser {
+public class HuiwenParser {
 	private String content;
 	
-	public HTMLParser(String content) {
+	public HuiwenParser(String content) {
 		this.content = content;
 	}
 	
