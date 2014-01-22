@@ -125,9 +125,8 @@ public class SearchActivity extends Activity implements OnClickListener {
 						getString(R.string.please_input_keyword), Toast.LENGTH_SHORT).show();
 				return;
 			}
-			
-			mBooks.clear();
-	    	mResultAdapter.notifyDataSetChanged();	
+	    	mResultAdapter = new BookResultAdapter(getApplication(), mBooks);
+	    	listView.setAdapter(mResultAdapter);
 		}
 		
 		//Prepare UI
@@ -149,18 +148,18 @@ public class SearchActivity extends Activity implements OnClickListener {
 		    	if(mPage == 1) {
 		    		mCountText.setVisibility(View.GONE);
 		    		
+		    		mBooks.clear();
 			    	mBooks.addAll(results);
 			    	//TODO
-			    	mResultAdapter = new BookResultAdapter(getApplication(), mBooks);
 			    	mCount = parser.getCount();
 					parser = null;
+					
 			    	mCountText.setText(String.format(getString(R.string.result_sum), mCount));
-			    	listView.setAdapter(mResultAdapter);
 		    	} else {
-			    	mBooks.addAll(results);
-			    	mResultAdapter.notifyDataSetChanged();		
+			    	mBooks.addAll(results);	
 		    	}
-		    	
+
+		    	mResultAdapter.notifyDataSetChanged();		    	
 		    	mLoadingIcon.setVisibility(View.GONE);
 		    	if(mLimit * mPage >= mCount) {
 		    		mLoadingText.setText(R.string.load_finished);
