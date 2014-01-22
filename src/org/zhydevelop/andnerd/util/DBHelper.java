@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Helper class to create & upgrade database cache tables
  */
 public class DBHelper extends SQLiteOpenHelper {
-
     /**
      * Version constant to increment when the database should be rebuilt
      */

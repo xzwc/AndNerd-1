@@ -11,8 +11,7 @@ public class AmazonParser {
 	 * @param html HTML源文件
 	 * @return 亚马逊商品信息对象
 	 */
-	public static AmazonItem single(String html) {
-		
+	public static AmazonItem parse(String html) {
 		String ISBN_BEGIN = "<title>", ISBN_END = " - 所有类别",
 			ANCHOR_BEGIN = "href=\"", ANCHOR_END = "\"",
 			IMAGE_BEGIN = "src=\"", IMAGE_END = ANCHOR_END;
