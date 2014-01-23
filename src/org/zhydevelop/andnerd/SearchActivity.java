@@ -19,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	Status mStatus;
 	
 	//界面元素
+	private ImageButton mButtonSearch;
 	private ImageView mButtonClear;
 	private EditText mTextKeyword;
 	private ListView listView;
@@ -53,6 +55,9 @@ public class SearchActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_search);
 		
 		mButtonClear = (ImageView)findViewById(R.id.button_clear_search);
+		mButtonClear.setOnClickListener(this);	
+		mButtonSearch = (ImageButton)findViewById(R.id.button_search);
+		mButtonSearch.setOnClickListener(this);
 		
 		LayoutInflater inflater = (LayoutInflater)getApplication()
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -62,7 +67,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 		mLoadingIcon = footer.findViewById(R.id.progress_loading_list);
 		mLoadingText = (TextView)footer.findViewById(R.id.text_load_more);
 		mCountText = (TextView)header.findViewById(R.id.text_result_sum);
-		
+				
 		listView = (ListView)findViewById(R.id.list_result);
 		listView.setDivider(null);
 		listView.addHeaderView(header);
@@ -79,13 +84,6 @@ public class SearchActivity extends Activity implements OnClickListener {
 		    public void onTextChanged(CharSequence s, int start, int before, int count) {}
 		});
 		
-		// Assign on click event
-		for(int id : new int[] {
-				R.id.button_search, R.id.button_clear_search
-		}){
-			findViewById(id).setOnClickListener(this);		
-		}
-		
 		listView.setOnScrollListener(new OnScrollListener(){
 			@Override
 	        public void onScroll(AbsListView paramAbsListView, int firstVisibleItem, 
@@ -98,8 +96,7 @@ public class SearchActivity extends Activity implements OnClickListener {
             			scrollState == OnScrollListener.SCROLL_STATE_IDLE &&
             			view.getLastVisiblePosition() == view.getCount() - 1) {
                 	load();
-                	mStatus = Status.LOADING_MORE;
-                	
+                	mStatus = Status.LOADING_MORE;                	
             	}
             }
 	    });
@@ -159,6 +156,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 			    	mBooks.addAll(results);	
 		    	}
 
+		    	mButtonSearch.setImageResource(R.drawable.ic_search);
 		    	mResultAdapter.notifyDataSetChanged();		    	
 		    	mLoadingIcon.setVisibility(View.GONE);
 		    	if(mLimit * mPage >= mCount) {
@@ -183,7 +181,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		switch(v.getId()){
+		switch(v.getId()) {
 		case R.id.button_clear_search:
 			//清空关键字
 			mTextKeyword.setText(mKeyword = "");
@@ -196,6 +194,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 			case READY:
 				//执行搜索
 				mPage = 0;
+				mButtonSearch.setImageResource(R.drawable.ic_cancel);
 				load();
 				break;
 			default:

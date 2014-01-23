@@ -9,37 +9,29 @@
     <ImageView
         android:id="@+id/img_header_colors"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="8dp"
         android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
         android:src="@drawable/header_colors" />
     
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="48dp"
+        android:background="@drawable/cab_background_top_holo_light" >
 
         <EditText
             android:id="@+id/edit_keyword"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/button_search"
+            android:layout_toRightOf="@+id/imageView1"
             android:background="@drawable/textfield_default"
             android:ems="10"
             android:hint="@string/search_hint"
             android:singleLine="true" >
 
         </EditText>
-
-        <Button
-            android:id="@+id/button_search"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/search" />
 
         <ImageView
             android:id="@+id/button_clear_search"
@@ -50,6 +42,25 @@
             android:layout_marginRight="10dp"
             android:contentDescription="@string/clear_text"
             android:src="@drawable/common_input_box_clear" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_return" />
+
+        <ImageButton
+            android:id="@+id/button_search"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/search"
+            android:src="@drawable/ic_search" />
 
     </RelativeLayout>
 
