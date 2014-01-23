@@ -9,4 +9,10 @@
         <item>@color/midnight_blue</item>
         <item>@color/black</item>
     </array>
+    
+    <string-array name="login_type">  
+        <item>@string/card_id</item>  
+        <item>@string/bar_code</item>  
+        <item>@string/mail</item> 
+    </string-array> 
 </resources>

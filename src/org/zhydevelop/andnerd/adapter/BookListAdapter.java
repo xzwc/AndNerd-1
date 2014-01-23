@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class BookResultAdapter extends BaseAdapter {
+public class BookListAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 	private List<Book> mBooks;
 	private int[] mTextColors;
@@ -24,7 +24,7 @@ public class BookResultAdapter extends BaseAdapter {
 		public View view;
 	}
 	
-	public BookResultAdapter(Context context, List<Book> books){
+	public BookListAdapter(Context context, List<Book> books){
 		mInflater = LayoutInflater.from(context);
 		mBooks = books;
 		
@@ -73,10 +73,10 @@ public class BookResultAdapter extends BaseAdapter {
 		viewHolder.author.setText(mBooks.get(position).getAuthor());
 		viewHolder.publisher.setText(mBooks.get(position).getPublisher());
 		
-		viewHolder.title.setTextColor(
-				mTextColors[position % mTextColors.length]);
-		viewHolder.view.setBackgroundColor(
-				mBackgroundColors[position % mBackgroundColors.length]);
+//		viewHolder.title.setTextColor(
+//				mTextColors[position % mTextColors.length]);
+//		viewHolder.view.setBackgroundColor(
+//				mBackgroundColors[position % mBackgroundColors.length]);
 		
 		return convertView;
 	}

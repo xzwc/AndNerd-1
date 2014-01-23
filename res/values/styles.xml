@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppBaseTheme" parent="@android:style/Theme.NoTitleBar">
+    <style name="AppBaseTheme" parent="@android:style/Theme.Light.NoTitleBar">
         
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">        
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:editTextStyle">@style/EditText</item>
+        <item name="android:buttonStyle">@style/Button</item>
     </style>
 
-    <style name="SearchEdit">
-        <item name="android:paddingLeft">2dp</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingRight">2dp</item>
-        <item name="android:paddingBottom">0dp</item>
-        <item name="android:background">@android:drawable/bottom_bar</item>
+    <style name="SearchEdit" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">#ff000000</item>
+        <item name="android:background">@drawable/edit_text_light</item>
     </style>
 
-    <style name="ButtonBarButton" />
-
+    <style name="Button" parent="@android:style/Widget.Button">
+        <item name="android:textColor">#ff000000</item>
+        <item name="android:background">@drawable/btn_default_light</item>
+        <item name="android:minWidth">64.0dip</item>
+        <item name="android:minHeight">48.0dip</item>
+    </style>
+    
+    <style name="EditText" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">#ff000000</item>
+        <item name="android:background">@drawable/edit_text_light</item>
+    </style>
 </resources>

@@ -3,7 +3,7 @@ package org.zhydevelop.andnerd;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.zhydevelop.andnerd.adapter.BookResultAdapter;
+import org.zhydevelop.andnerd.adapter.BookListAdapter;
 import org.zhydevelop.andnerd.bean.Book;
 import org.zhydevelop.andnerd.parser.HuiwenParser;
 import org.zhydevelop.andnerd.util.HuiwenURLBuilder;
@@ -35,7 +35,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	
 	//界面元素
 	private ImageView mButtonClear;
-	private EditText textKeyword;
+	private EditText mTextKeyword;
 	private ListView listView;
 	private View mLoadingIcon;
 	private TextView mLoadingText, mCountText; 
@@ -45,7 +45,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	private String mKeyword;
 	//搜素结果
 	private ArrayList<Book> mBooks;
-	private BookResultAdapter mResultAdapter;
+	private BookListAdapter mResultAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +68,8 @@ public class SearchActivity extends Activity implements OnClickListener {
 		listView.addHeaderView(header);
 		listView.addFooterView(footer);		
 		
-		textKeyword = (EditText)findViewById(R.id.edit_keyword);
-		textKeyword.addTextChangedListener(new TextWatcher() {
+		mTextKeyword = (EditText)findViewById(R.id.edit_keyword);
+		mTextKeyword.addTextChangedListener(new TextWatcher() {
 	        public void afterTextChanged(Editable e) { 
 	        	mKeyword = e.toString();
 	        	mButtonClear.setVisibility(mKeyword.length() > 0 ? View.VISIBLE : View.GONE);
@@ -99,11 +99,11 @@ public class SearchActivity extends Activity implements OnClickListener {
             			view.getLastVisiblePosition() == view.getCount() - 1) {
                 	load();
                 	mStatus = Status.LOADING_MORE;
-                	//TODO
+                	
             	}
             }
 	    });
-        textKeyword.setText(getIntent().getStringExtra(EXTRA_KEYWORD));
+		mTextKeyword.setText(getIntent().getStringExtra(EXTRA_KEYWORD));
         mPage = 0;
         mLimit = 20;
         mBooks = new ArrayList<Book>(mLimit);
@@ -118,14 +118,14 @@ public class SearchActivity extends Activity implements OnClickListener {
 		//第一次搜索
 		if(mPage == 0) {
 			mStatus = Status.LOADING_FIRST;
-			mKeyword = textKeyword.getText().toString();
+			mKeyword = mTextKeyword.getText().toString();
 			
 			if(mKeyword == null || mKeyword.length() == 0) {
 				Toast.makeText(getApplicationContext(), 
 						getString(R.string.please_input_keyword), Toast.LENGTH_SHORT).show();
 				return;
 			}
-	    	mResultAdapter = new BookResultAdapter(getApplication(), mBooks);
+	    	mResultAdapter = new BookListAdapter(getApplication(), mBooks);
 	    	listView.setAdapter(mResultAdapter);
 		}
 		
@@ -173,6 +173,8 @@ public class SearchActivity extends Activity implements OnClickListener {
 		    public void onFailure(int statusCode, org.apache.http.Header[] headers, 
 		    	byte[] responseBody, Throwable error)
 		    {
+		    	mLoadingIcon.setVisibility(View.GONE);
+				mLoadingText.setText(R.string.netword_error);
 		    	Toast.makeText(getApplication(), getString(R.string.netword_error), 
 		    			Toast.LENGTH_SHORT).show();
 		    }
@@ -183,15 +185,22 @@ public class SearchActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch(v.getId()){
 		case R.id.button_clear_search:
-			mKeyword = "";
-			textKeyword.setText(mKeyword);
+			//清空关键字
+			mTextKeyword.setText(mKeyword = "");
 			mBooks.clear();
 			mResultAdapter.notifyDataSetChanged();
 			mLoadingText.setVisibility(View.GONE);
 			break;
 		case R.id.button_search:
-			mPage = 0;
-			load();
+			switch(mStatus) {
+			case READY:
+				//执行搜索
+				mPage = 0;
+				load();
+				break;
+			default:
+				break;
+			} 
 			break;
 		}
 	}

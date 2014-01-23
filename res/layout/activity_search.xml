@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
+    android:id="@+id/linear_layout_search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <ImageView
+        android:id="@+id/img_header_colors"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/header_colors" />
+    
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/header_colors" >
+        android:layout_height="48dp">
 
         <EditText
             android:id="@+id/edit_keyword"
@@ -18,11 +25,11 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/button_search"
+            android:background="@drawable/textfield_default"
             android:ems="10"
             android:hint="@string/search_hint"
             android:singleLine="true" >
 
-            <requestFocus />
         </EditText>
 
         <Button
@@ -50,8 +57,10 @@
         android:id="@+id/list_result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="@color/alizarin"
         android:fastScrollEnabled="true"
         tools:listitem="@layout/listitem_book_search" >
+
     </ListView>
 
 </LinearLayout>

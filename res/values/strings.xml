@@ -24,4 +24,12 @@
     <string name="column_avaliable_total">可借 / 馆藏</string>
     <string name="title">标题</string>
     <string name="result_sum">共找到%s个结果</string>
+    <string name="login">登录</string>
+    <string name="user_name">用户名</string>
+    <string name="password">密码</string>
+    
+    <string name="mail">邮箱</string>
+    <string name="card_id">证件号</string>
+    <string name="bar_code">条码号</string>
+    <string name="login_hint">证件号 / 邮箱</string>
 </resources>

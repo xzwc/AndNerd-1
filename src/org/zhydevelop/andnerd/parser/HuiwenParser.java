@@ -21,6 +21,7 @@ import org.zhydevelop.andnerd.bean.Book;
 public class HuiwenParser {
 	private String content;
 	
+	//TODO:version
 	public HuiwenParser(String content) {
 		this.content = content;
 	}
@@ -65,11 +66,9 @@ public class HuiwenParser {
 	    		book.setAuthor(parts[2]).setPublisher(parts[3])
 	    			.setYear(Integer.valueOf(parts[4].replaceAll("[^0-9]+", "")));
 	    	}
-	    	//TODO
 	    	books.add(book);
 		}
 		
-		//TODO: doc.select("strong.red").text()
 		return books;
 	}
 }
