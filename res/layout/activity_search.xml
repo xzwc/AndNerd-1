@@ -17,13 +17,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/cab_background_top_holo_light" >
+        android:background="@drawable/background_top_bar" >
 
         <EditText
             android:id="@+id/edit_keyword"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
+            android:layout_alignTop="@+id/button_search"
             android:layout_toLeftOf="@+id/button_search"
             android:layout_toRightOf="@+id/button_search_return"
             android:background="@drawable/textfield_default"
