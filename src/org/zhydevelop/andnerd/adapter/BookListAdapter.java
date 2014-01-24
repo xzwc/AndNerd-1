@@ -6,7 +6,6 @@ import org.zhydevelop.andnerd.R;
 import org.zhydevelop.andnerd.bean.Book;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,21 +15,21 @@ import android.widget.TextView;
 public class BookListAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 	private List<Book> mBooks;
-	private int[] mTextColors;
-	private int[] mBackgroundColors;
+//	private int[] mTextColors;
+//	private int[] mBackgroundColors;
 	
 	private final class ViewHolder {
 		public TextView title, number, code, publisher, author;
-		public View view;
+//		public View view;
 	}
 	
 	public BookListAdapter(Context context, List<Book> books){
 		mInflater = LayoutInflater.from(context);
 		mBooks = books;
 		
-		Resources res = context.getResources();
-		mTextColors = res.getIntArray(R.array.list_text_colors);
-		mBackgroundColors = res.getIntArray(R.array.list_background_colors);
+//		Resources res = context.getResources();
+//		mTextColors = res.getIntArray(R.array.list_text_colors);
+//		mBackgroundColors = res.getIntArray(R.array.list_background_colors);
 	}
 	
 	@Override
@@ -54,7 +53,7 @@ public class BookListAdapter extends BaseAdapter {
 		
 		if (convertView == null) {			 
 			viewHolder = new ViewHolder();
-			viewHolder.view = convertView = mInflater.inflate(
+			/*viewHolder.view = */convertView = mInflater.inflate(
 					R.layout.listitem_book_search, null);		
 			viewHolder.title = (TextView)convertView.findViewById(R.id.text_title);
 			viewHolder.number = (TextView)convertView.findViewById(R.id.text_number);

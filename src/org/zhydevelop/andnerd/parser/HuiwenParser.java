@@ -26,11 +26,19 @@ public class HuiwenParser {
 		this.content = content;
 	}
 	
+	/**
+	 * @return 结果总数
+	 */
 	public int getCount() {
 		String TAG_START = "<strong class=\"red\">", TAG_END = "</strong>";
 		int start = content.indexOf(TAG_START) + TAG_START.length();
 		int end = content.indexOf(TAG_END, start);
-		return Integer.valueOf(content.substring(start, end));
+		
+		try {
+			return Integer.valueOf(content.substring(start, end));
+		} catch (NumberFormatException e) {
+			return 0;
+		}		
 	}
 	
 	public List<Book> parseBooks() {

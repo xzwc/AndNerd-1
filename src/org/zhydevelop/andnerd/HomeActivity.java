@@ -19,7 +19,7 @@ public class HomeActivity extends Activity {
 		setContentView(R.layout.activity_login);	
 		startActivity(new Intent(
 				this, SearchActivity.class).putExtra(
-						SearchActivity.EXTRA_KEYWORD, "ruby"));
+						SearchActivity.EXTRA_KEYWORD, "你妹"));
 	}
 
 }

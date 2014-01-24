@@ -31,7 +31,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 public class SearchActivity extends Activity implements OnClickListener {
 	public static String EXTRA_KEYWORD = "keyword";
 	
-	private enum Status {READY, LOADING_FIRST, LOADING_MORE, CANCELLED, DONE};
+	private enum Status {READY, LOADING_FIRST, LOADING_MORE, DONE};
 	Status mStatus;
 	
 	//界面元素
@@ -48,6 +48,9 @@ public class SearchActivity extends Activity implements OnClickListener {
 	//搜素结果
 	private ArrayList<Book> mBooks;
 	private BookListAdapter mResultAdapter;
+	
+	//异步请求
+	AsyncHttpClient asyncHttpClient;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,11 +103,15 @@ public class SearchActivity extends Activity implements OnClickListener {
             	}
             }
 	    });
-		mTextKeyword.setText(getIntent().getStringExtra(EXTRA_KEYWORD));
+		
         mPage = 0;
         mLimit = 20;
         mBooks = new ArrayList<Book>(mLimit);
+        
+        asyncHttpClient = new AsyncHttpClient();
         //search books
+        mKeyword = getIntent().getStringExtra(EXTRA_KEYWORD);
+		mTextKeyword.setText(mKeyword);
         load();
 	}
 	
@@ -113,10 +120,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	 */
 	private void load() {	
 		//第一次搜索
-		if(mPage == 0) {
-			mStatus = Status.LOADING_FIRST;
-			mKeyword = mTextKeyword.getText().toString();
-			
+		if(mPage == 0) {			
 			if(mKeyword == null || mKeyword.length() == 0) {
 				Toast.makeText(getApplicationContext(), 
 						getString(R.string.please_input_keyword), Toast.LENGTH_SHORT).show();
@@ -124,38 +128,39 @@ public class SearchActivity extends Activity implements OnClickListener {
 			}
 	    	mResultAdapter = new BookListAdapter(getApplication(), mBooks);
 	    	listView.setAdapter(mResultAdapter);
+	    	
+	    	mCountText.setVisibility(View.GONE);
 		}
 		
 		//Prepare UI
 		mLoadingIcon.setVisibility(View.VISIBLE);
 		mLoadingText.setText(R.string.loading);
-		mLoadingText.setVisibility(View.VISIBLE);
+		mLoadingText.setVisibility(View.VISIBLE);		
 		
 		mPage++;
 		String url = HuiwenURLBuilder.search(mKeyword, mPage, mLimit);		
-		AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+		
 		asyncHttpClient.get(url, new AsyncHttpResponseHandler() {
 		    @Override
-		    public void onSuccess(String response) {
-		    	if(mStatus == Status.CANCELLED) return;
-		    	
+		    public void onSuccess(String response) {		    	
 		    	HuiwenParser parser = new HuiwenParser(response);
-		    	List<Book> results = parser.parseBooks();
-		    		    		
-		    	if(mPage == 1) {
-		    		mCountText.setVisibility(View.GONE);
-		    		
+		    	List<Book> result;
+		    	if(mPage == 1) {		    		
 		    		mBooks.clear();
-			    	mBooks.addAll(results);
-			    	//TODO
 			    	mCount = parser.getCount();
-					parser = null;
-					
+					if(mCount == 0) {
+						//TODO
+					} else {
+						mCountText.setVisibility(View.VISIBLE);
+						result = parser.parseBooks();
+				    	mBooks.addAll(result);
+					}
+					parser = null; //回收内存
 			    	mCountText.setText(String.format(getString(R.string.result_sum), mCount));
 		    	} else {
-			    	mBooks.addAll(results);	
+		    		result = parser.parseBooks();
+			    	mBooks.addAll(result);
 		    	}
-
 		    	mButtonSearch.setImageResource(R.drawable.ic_search);
 		    	mResultAdapter.notifyDataSetChanged();		    	
 		    	mLoadingIcon.setVisibility(View.GONE);
@@ -171,17 +176,44 @@ public class SearchActivity extends Activity implements OnClickListener {
 		    public void onFailure(int statusCode, org.apache.http.Header[] headers, 
 		    	byte[] responseBody, Throwable error)
 		    {
+		    	//TODO
 		    	mLoadingIcon.setVisibility(View.GONE);
-				mLoadingText.setText(R.string.netword_error);
-		    	Toast.makeText(getApplication(), getString(R.string.netword_error), 
-		    			Toast.LENGTH_SHORT).show();
+		    	mButtonSearch.setImageResource(R.drawable.ic_search);
+		    	if(mStatus == Status.LOADING_FIRST || mStatus == Status.LOADING_MORE) {
+		    		//网络错误
+		    		mLoadingText.setText(R.string.netword_error);
+			    	Toast.makeText(getApplication(), getString(R.string.netword_error), 
+			    			Toast.LENGTH_SHORT).show();	
+		    	} else {
+		    		//用户取消
+		    		mStatus = Status.READY;
+		    	}				
 		    }
 		});
+	}
+	
+	@Override  
+    protected void onDestroy() {  
+        super.onDestroy();
+        //TODO
+        if(mStatus == Status.LOADING_FIRST || mStatus == Status.LOADING_MORE)
+        	abort();
+    }
+	
+	/*
+	 * 取消请求
+	 */
+	private void abort() {
+		//取消
+		asyncHttpClient.cancelRequests(getApplicationContext(), true);
+		mStatus = Status.READY;
+		mButtonSearch.setImageResource(R.drawable.ic_search);		
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()) {
+		//清空文本框
 		case R.id.button_clear_search:
 			//清空关键字
 			mTextKeyword.setText(mKeyword = "");
@@ -189,14 +221,25 @@ public class SearchActivity extends Activity implements OnClickListener {
 			mResultAdapter.notifyDataSetChanged();
 			mLoadingText.setVisibility(View.GONE);
 			break;
+
 		case R.id.button_search:
 			switch(mStatus) {
 			case READY:
+			case DONE:
 				//执行搜索
-				mPage = 0;
 				mButtonSearch.setImageResource(R.drawable.ic_cancel);
+
+				mPage = 0;
+				mStatus = Status.LOADING_FIRST;
 				load();
 				break;
+			case LOADING_FIRST:
+				//TODO
+				abort();
+			case LOADING_MORE:
+				abort();
+				//TODO
+				
 			default:
 				break;
 			} 

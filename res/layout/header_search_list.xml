@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/text_avaliable_total"
-        android:text="@string/result_sum"
+        android:text="@string/not_found"
         android:visibility="gone"
         android:color="@color/clouds" />
 

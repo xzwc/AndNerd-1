@@ -10,6 +10,7 @@
     <string name="back">返回</string>
     <string name="menu">菜单</string> 
     
+    <string name="user_aborted">您取消了搜索</string>
     <string name="netword_error">发生网络错误</string>
     <string name="placeholder_avaliable">4/5</string>
     <string name="placeholder_title">书籍题名</string>
@@ -24,6 +25,7 @@
     <string name="column_avaliable_total">可借 / 馆藏</string>
     <string name="title">标题</string>
     <string name="result_sum">共找到%s个结果</string>
+    <string name="not_found">没有找到符合条件的书籍</string>
     <string name="login">登录</string>
     <string name="user_name">用户名</string>
     <string name="password">密码</string>
