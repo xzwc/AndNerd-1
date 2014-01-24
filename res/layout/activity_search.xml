@@ -25,10 +25,12 @@
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/button_search"
-            android:layout_toRightOf="@+id/imageView1"
+            android:layout_toRightOf="@+id/button_search_return"
             android:background="@drawable/textfield_default"
             android:ems="10"
             android:hint="@string/search_hint"
+            android:imeOptions="actionDone|actionSearch"
+            android:inputType="text"
             android:singleLine="true" >
 
         </EditText>
@@ -44,7 +46,7 @@
             android:src="@drawable/common_input_box_clear" />
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/button_search_return"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
