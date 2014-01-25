@@ -2,7 +2,7 @@
 ## Eclipse
 #################
 .file/
-#libs/*.jar
+libs/*.jar
 gen/
 *.pydevproject
 .project

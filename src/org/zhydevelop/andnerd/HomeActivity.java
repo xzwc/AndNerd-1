@@ -13,7 +13,8 @@ public class HomeActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);	
+		setContentView(R.layout.activity_home);	
+		
 		startActivity(new Intent(
 				this, SearchActivity.class).putExtra(
 						SearchActivity.EXTRA_KEYWORD, "Ruby"));
