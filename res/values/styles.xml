@@ -26,4 +26,9 @@
         <item name="android:textColor">#ff000000</item>
         <item name="android:background">@drawable/edit_text_light</item>
     </style>
+    
+    <style name="HotKeyword" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/clouds</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>
