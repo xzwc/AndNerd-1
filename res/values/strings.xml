@@ -34,4 +34,7 @@
     <string name="card_id">证件号</string>
     <string name="bar_code">条码号</string>
     <string name="login_hint">证件号 / 邮箱</string>
+    <string name="scan_barcode">扫描条码</string>
+    <string name="click_here_to_search">点这里查找图书</string>
+    <string name="loading_top_keywords">正在载入热门检索词</string>
 </resources>

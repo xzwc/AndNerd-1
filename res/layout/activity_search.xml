@@ -63,7 +63,7 @@
             android:layout_alignParentTop="true"
             android:background="@android:color/transparent"
             android:contentDescription="@string/search"
-            android:src="@drawable/ic_search" />
+            android:src="@drawable/ic_search_normal" />
     </RelativeLayout>
 
     <ListView
