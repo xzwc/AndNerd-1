@@ -12,26 +12,26 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class BookListAdapter extends BaseAdapter {
+public class NotifyListAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 	private List<Book> mBooks;
-	//	private int[] mTextColors;
-	//	private int[] mBackgroundColors;
-
+//	private int[] mTextColors;
+//	private int[] mBackgroundColors;
+	
 	private final class ViewHolder {
 		public TextView title, number, code, publisher, author;
-		//		public View view;
+//		public View view;
 	}
-
-	public BookListAdapter(Context context, List<Book> books){
+	
+	public NotifyListAdapter(Context context, List<Book> books){
 		mInflater = LayoutInflater.from(context);
 		mBooks = books;
-
-		//		Resources res = context.getResources();
-		//		mTextColors = res.getIntArray(R.array.list_text_colors);
-		//		mBackgroundColors = res.getIntArray(R.array.list_background_colors);
+		
+//		Resources res = context.getResources();
+//		mTextColors = res.getIntArray(R.array.list_text_colors);
+//		mBackgroundColors = res.getIntArray(R.array.list_background_colors);
 	}
-
+	
 	@Override
 	public int getCount() {
 		return mBooks.size();
@@ -50,11 +50,11 @@ public class BookListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder = null;
-
+		
 		if (convertView == null) {			 
 			viewHolder = new ViewHolder();
-			/*viewHolder.view = */
-			convertView = mInflater.inflate(R.layout.listitem_book_search, null);		
+			/*viewHolder.view = */convertView = mInflater.inflate(
+					R.layout.listitem_book_search, null);		
 			viewHolder.title = (TextView)convertView.findViewById(R.id.text_title);
 			viewHolder.number = (TextView)convertView.findViewById(R.id.text_number);
 			viewHolder.code = (TextView)convertView.findViewById(R.id.text_code);
@@ -71,12 +71,12 @@ public class BookListAdapter extends BaseAdapter {
 		viewHolder.code.setText(mBooks.get(position).getCode());
 		viewHolder.author.setText(mBooks.get(position).getAuthor());
 		viewHolder.publisher.setText(mBooks.get(position).getPublisher());
-
-		//		viewHolder.title.setTextColor(
-		//				mTextColors[position % mTextColors.length]);
-		//		viewHolder.view.setBackgroundColor(
-		//				mBackgroundColors[position % mBackgroundColors.length]);
-
+		
+//		viewHolder.title.setTextColor(
+//				mTextColors[position % mTextColors.length]);
+//		viewHolder.view.setBackgroundColor(
+//				mBackgroundColors[position % mBackgroundColors.length]);
+		
 		return convertView;
 	}
 

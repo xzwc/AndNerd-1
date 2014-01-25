@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
     <ImageView
         android:id="@+id/img_header_colors"
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:contentDescription="@string/app_name"
         android:scaleType="fitXY"
         android:src="@drawable/header_colors" />
-    
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -32,8 +32,8 @@
             android:hint="@string/search_hint"
             android:imeOptions="actionDone|actionSearch"
             android:inputType="text"
+            android:selectAllOnFocus="true"
             android:singleLine="true" >
-
         </EditText>
 
         <ImageView
@@ -64,17 +64,15 @@
             android:background="@android:color/transparent"
             android:contentDescription="@string/search"
             android:src="@drawable/ic_search" />
-
     </RelativeLayout>
 
     <ListView
         android:id="@+id/list_result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/alizarin"
+        android:divider="@color/transparent"
         android:fastScrollEnabled="true"
         tools:listitem="@layout/listitem_book_search" >
-
     </ListView>
 
 </LinearLayout>

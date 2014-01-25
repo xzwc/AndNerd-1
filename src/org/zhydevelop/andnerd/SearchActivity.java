@@ -83,9 +83,8 @@ public class SearchActivity extends Activity implements OnClickListener {
 
 		//结果列表
 		listView = (ListView)findViewById(R.id.list_result);
-		listView.setDivider(null);
 		listView.addHeaderView(header);
-		listView.addFooterView(footer);		
+		listView.addFooterView(footer);
 		listView.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -227,11 +226,18 @@ public class SearchActivity extends Activity implements OnClickListener {
 				//TODO
 				mLoadingIcon.setVisibility(View.GONE);
 				mButtonSearch.setImageResource(R.drawable.ic_search);
-				if(mStatus == Status.LOADING_FIRST || mStatus == Status.LOADING_MORE) {
+				if(mStatus == Status.LOADING_FIRST ) {
 					//网络错误
 					mLoadingText.setText(R.string.not_found);
 					Toast.makeText(getApplication(), getString(R.string.netword_error), 
-							Toast.LENGTH_SHORT).show();	
+							Toast.LENGTH_SHORT).show();
+					mStatus = Status.READY;
+				} else if(mStatus == Status.LOADING_MORE){
+					//网络错误
+					mLoadingText.setText(R.string.load_finished);
+					Toast.makeText(getApplication(), getString(R.string.netword_error), 
+							Toast.LENGTH_SHORT).show();
+					mStatus = Status.DONE;
 				} else {
 					//用户取消
 					mStatus = Status.READY;

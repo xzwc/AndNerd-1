@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
     <!-- Application theme. -->
-    <style name="AppTheme" parent="@android:style/Theme.Light.NoTitleBar">        
+    <style name="AppTheme" parent="@android:style/Theme.Light.NoTitleBar">
+
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:editTextStyle">@style/EditText</item>
         <item name="android:buttonStyle">@style/Button</item>
+        <item name="android:listSelector">@android:drawable/list_selector_background</item>
     </style>
 
     <style name="SearchEdit" parent="@android:style/Widget.EditText">
@@ -18,7 +21,7 @@
         <item name="android:minWidth">64.0dip</item>
         <item name="android:minHeight">48.0dip</item>
     </style>
-    
+
     <style name="EditText" parent="@android:style/Widget.EditText">
         <item name="android:textColor">#ff000000</item>
         <item name="android:background">@drawable/edit_text_light</item>
