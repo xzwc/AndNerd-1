@@ -1,4 +1,4 @@
-package org.zhydevelop.andnerd.util;
+package org.zhydevelop.andnerd.db;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -32,6 +32,31 @@ public class DBManager {
 			db = helper.getReadableDatabase();
 		}		
 	}
+	
+	/*
+	 * 插入搜索记录
+	 */
+	public void addRecentKeyword(String keyword) {
+		String sql = "insert into [history](keyword, timestamp) values(?, datetime());";
+		db.rawQuery(sql, new String[]{keyword});		
+	}
+	
+	public List<String> getRecentKeywords() {
+		String sql = "select distinct keyword from [history] order by timestamp desc limit 10;";
+		Cursor cur = db.rawQuery(sql, null);
+
+		//最多10个
+		ArrayList<String> keywords = new ArrayList<String>(10);
+		if(cur == null || !cur.moveToFirst()) return keywords;	
+		
+		do {
+			keywords.add(cur.getString(0));
+		} while (cur.moveToNext());
+		
+		keywords.trimToSize();
+		cur.close();
+		return keywords;
+	}
 
 	/*
 	 * 查找符合条件的分类
@@ -48,7 +73,7 @@ public class DBManager {
 		//开始查询
 		Cursor cur = db.rawQuery(sql, null);
 		ArrayList<Category> list = new ArrayList<Category>();
-		if(cur == null || !cur.moveToFirst()) return null;
+		if(cur == null || !cur.moveToFirst()) return list;
 		
 		//取搜索结果
 		String code, title; int children;

@@ -25,5 +25,8 @@
     <string name="bar_code">条码号</string>
     <string name="login_hint">证件号 / 邮箱</string>
     <string name="click_here_to_search">搜索爱看的书</string>
-
+    <string name="title">标题</string>
+    <string name="cover">封面</string>
+    <string name="placeholder_isbn">978-7-302-27782-8</string>
+    <string name="error_invalid_call">获取书籍信息失败</string>
 </resources>

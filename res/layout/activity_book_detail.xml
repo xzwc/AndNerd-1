@@ -3,5 +3,123 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
+    <ImageView
+        android:id="@+id/img_header_colors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        android:src="@drawable/header_colors" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/background_top_bar" >
+
+        <ImageView
+            android:id="@+id/button_search_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_return" />
+
+        <ImageButton
+            android:id="@+id/button_detail_menu"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/search"
+            android:src="@drawable/ic_search" />
+
+        <TextView
+            android:id="@+id/text_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/wet_asphalt" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/img_detail_cover"
+            android:layout_width="90dp"
+            android:layout_height="120dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/cover"
+            android:scaleType="fitStart"
+            android:src="@drawable/blank_cover" />
+
+        <TextView
+            android:id="@+id/text_detail_book_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img_detail_cover"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@+id/img_detail_cover"
+            android:text="@string/placeholder_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/alizarin" />
+
+        <TextView
+            android:id="@+id/text_detail_book_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/text_detail_book_title"
+            android:layout_below="@+id/text_detail_book_title"
+            android:text="@string/placeholder_author"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/text_detail_book_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_detail_book_author"
+            android:layout_toRightOf="@+id/img_detail_cover"
+            android:text="@string/placeholder_code" />
+
+        <TextView
+            android:id="@+id/text_detail_book_publisher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/text_detail_book_code"
+            android:layout_below="@+id/text_detail_book_code"
+            android:text="@string/placeholder_publisher"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/text_detail_book_avaliable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img_detail_cover"
+            android:layout_alignLeft="@+id/img_detail_cover"
+            android:layout_alignRight="@+id/img_detail_cover"
+            android:background="#55000000"
+            android:gravity="center"
+            android:text="@string/placeholder_avaliable"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/text_detail_book_isbn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_detail_book_publisher"
+            android:layout_toRightOf="@+id/img_detail_cover"
+            android:text="@string/placeholder_isbn" />
+
+    </RelativeLayout>
+
 </LinearLayout>

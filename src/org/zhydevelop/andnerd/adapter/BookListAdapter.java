@@ -15,21 +15,14 @@ import android.widget.TextView;
 public class BookListAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
 	private List<Book> mBooks;
-	//	private int[] mTextColors;
-	//	private int[] mBackgroundColors;
 
 	private final class ViewHolder {
 		public TextView title, number, code, publisher, author;
-		//		public View view;
 	}
 
 	public BookListAdapter(Context context, List<Book> books){
 		mInflater = LayoutInflater.from(context);
 		mBooks = books;
-
-		//		Resources res = context.getResources();
-		//		mTextColors = res.getIntArray(R.array.list_text_colors);
-		//		mBackgroundColors = res.getIntArray(R.array.list_background_colors);
 	}
 
 	@Override
@@ -38,13 +31,13 @@ public class BookListAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public Object getItem(int position) {
-		return mBooks.get(position);
+	public Book getItem(int position) {
+		return mBooks.get(position - 1);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		return 0;
+		return position;
 	}
 
 	@Override
@@ -53,7 +46,6 @@ public class BookListAdapter extends BaseAdapter {
 
 		if (convertView == null) {			 
 			viewHolder = new ViewHolder();
-			/*viewHolder.view = */
 			convertView = mInflater.inflate(R.layout.listitem_book_search, null);		
 			viewHolder.title = (TextView)convertView.findViewById(R.id.text_title);
 			viewHolder.number = (TextView)convertView.findViewById(R.id.text_number);
@@ -71,11 +63,6 @@ public class BookListAdapter extends BaseAdapter {
 		viewHolder.code.setText(mBooks.get(position).getCode());
 		viewHolder.author.setText(mBooks.get(position).getAuthor());
 		viewHolder.publisher.setText(mBooks.get(position).getPublisher());
-
-		//		viewHolder.title.setTextColor(
-		//				mTextColors[position % mTextColors.length]);
-		//		viewHolder.view.setBackgroundColor(
-		//				mBackgroundColors[position % mBackgroundColors.length]);
 
 		return convertView;
 	}

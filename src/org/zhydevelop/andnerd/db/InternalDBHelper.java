@@ -1,4 +1,4 @@
-package org.zhydevelop.andnerd.util;
+package org.zhydevelop.andnerd.db;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

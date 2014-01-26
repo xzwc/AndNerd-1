@@ -10,6 +10,7 @@ import org.zhydevelop.andnerd.util.HuiwenURLBuilder;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +24,7 @@ import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -34,8 +36,11 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class SearchActivity extends Activity implements OnClickListener {
+	//Intent相关常量
 	public static String EXTRA_KEYWORD = "keyword";
-	public static int MAX_CONNECTIONS = 3; //同时进行的HTTP请求数
+	
+	//同时进行的HTTP请求数
+	public static int MAX_CONNECTIONS = 3;
 
 	//运行状态
 	private enum Status {READY, LOADING_FIRST, LOADING_MORE, DONE};
@@ -66,7 +71,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 
 		mButtonClear = (ImageView)findViewById(R.id.button_clear_search);
 		mButtonClear.setOnClickListener(this);	
-		mButtonSearch = (ImageButton)findViewById(R.id.button_search);
+		mButtonSearch = (ImageButton)findViewById(R.id.button_detail_menu);
 		mButtonSearch.setOnClickListener(this);
 
 		findViewById(R.id.button_search_return).setOnClickListener(this);
@@ -142,7 +147,23 @@ public class SearchActivity extends Activity implements OnClickListener {
 		mBooks = new ArrayList<Book>(mLimit);
 		mResultAdapter = new BookListAdapter(getApplication(), mBooks);
 		listView.setAdapter(mResultAdapter);
-
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+				Book book = mResultAdapter.getItem(position);
+				if(book == null) return;
+				
+				//打开页面
+				Intent intent = new Intent(SearchActivity.this, BookDetailActivity.class);
+				Bundle bundle = new Bundle();
+				//以object方式传递参数
+				intent.setAction(BookDetailActivity.ACTION_SERIALIZED);
+				bundle.putSerializable(BookDetailActivity.TAG_BOOK, book);
+				intent.putExtras(bundle);
+				startActivity(intent);
+			}
+		});
+		
 		asyncHttpClient = new AsyncHttpClient();        
 		asyncHttpClient.setMaxConnections(MAX_CONNECTIONS);
 		//search books
@@ -293,7 +314,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 			mCountText.setVisibility(View.GONE);			
 			break;
 
-		case R.id.button_search:
+		case R.id.button_detail_menu:
 			mTextKeyword.clearFocus();
 			switch(mStatus) {
 			case READY:
