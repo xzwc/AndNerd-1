@@ -1,49 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layoutAnimation="@anim/layout_fade_in"
+    android:background="@drawable/list_background"
+    android:layoutAnimation="@anim/layout_hold"
     android:orientation="horizontal"
     android:padding="10dp" >
 
     <TextView
         android:id="@+id/text_code"
+        style="@style/DetailedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/text_title"
         android:layout_below="@+id/text_title"
-        android:text="@string/placeholder_code"
-        android:textColor="@color/belize_hole"
-        android:textSize="13sp" />
+        android:text="@string/placeholder_code" />
 
     <TextView
         android:id="@+id/text_author"
+        style="@style/DetailedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/text_code"
         android:layout_below="@+id/text_code"
-        android:text="@string/placeholder_author"
-        android:textColor="@color/wet_asphalt" />
+        android:text="@string/placeholder_author" />
 
     <TextView
         android:id="@+id/text_publisher"
+        style="@style/DetailedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/text_author"
         android:layout_below="@+id/text_author"
         android:text="@string/placeholder_publisher"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/turquoise" />
-
-    <TextView
-        android:id="@+id/text_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/text_number"
-        android:text="@string/placeholder_title"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/text_number"
@@ -51,10 +42,29 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/text_title"
-        android:layout_marginRight="10dp"
         android:text="@string/placeholder_avaliable"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/alizarin"
-        android:textSize="24sp" />
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_publisher"
+        android:layout_alignTop="@+id/text_title"
+        android:layout_toRightOf="@+id/text_number"
+        android:src="@drawable/splitter"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imageView1"
+        android:text="@string/placeholder_title"
+        android:textColor="@color/belize_hole"
+        android:textSize="20sp" />
 
 </RelativeLayout>

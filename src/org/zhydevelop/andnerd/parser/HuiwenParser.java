@@ -14,9 +14,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.zhydevelop.andnerd.bean.Book;
 
+import android.text.Html;
+
 /**
  * @author ChiChou
- *
  */
 public class HuiwenParser {
 	private String content;
@@ -41,8 +42,11 @@ public class HuiwenParser {
 		}		
 	}
 	
+	/**
+	 * @return 书籍列表
+	 */
 	public List<Book> parseBooks() {
-		List<Book> books = new ArrayList<Book>();
+		ArrayList<Book> books = new ArrayList<Book>();
 		Document doc = Jsoup.parse(content);
 				
 		Elements elements = doc.select(".list_books");
@@ -76,7 +80,34 @@ public class HuiwenParser {
 	    	}
 	    	books.add(book);
 		}
-		
+		books.trimToSize();
 		return books;
+	}
+	
+	/**
+	 * @param content HTML正文
+	 * @return 解析的关键词列表
+	 * @author ChiChou
+	 */
+	public List<String> parseKeywords() {
+		//特征码
+		String TAG_OPEN = "')\">", TAG_CLOSE = "</a>";
+		//返回值
+		ArrayList<String> keywords = new ArrayList<String>();
+		//区间(a,b)
+		int pos = content.indexOf(TAG_OPEN), a, b;
+		//找不到特征字符
+		if(pos == -1) return keywords;
+		
+		//逐个搜索关键词
+		do {
+			a = pos + TAG_OPEN.length();
+			b = content.indexOf(TAG_CLOSE, a);
+			keywords.add(Html.fromHtml(content.substring(a, b)).toString());
+			pos = content.indexOf(TAG_OPEN, b);
+		} while(pos != -1);
+		
+		keywords.trimToSize();
+		return keywords;
 	}
 }

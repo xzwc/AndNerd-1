@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">馆藏学霸</string>
     <string name="search_hint">查找图书</string>
-    <string name="search">搜索</string>    
-    <string name="waiting_for_search">正在检索书目，请稍候</string>
-    <string name="searching">检索中</string>
+    <string name="search">搜索</string>
     <string name="loading">正在载入</string>
-    <string name="cover">封面</string>
-    <string name="back">返回</string>
-    <string name="menu">菜单</string> 
-    
     <string name="user_aborted">您取消了搜索</string>
     <string name="netword_error">发生网络错误</string>
     <string name="placeholder_avaliable">4/5</string>
@@ -17,24 +12,18 @@
     <string name="placeholder_code">TP311.13/L36R</string>
     <string name="placeholder_author">作者</string>
     <string name="placeholder_publisher">O\'Reilly</string>
-    
-    <string name="please_input_keyword">请输入关键字…</string>
-    <string name="load_more">下拉查看更多</string>
+    <string name="please_input_keyword">请输入关键字</string>
     <string name="load_finished">没有更多结果了</string>
     <string name="clear_text">清空文字</string>
     <string name="column_avaliable_total">可借 / 馆藏</string>
-    <string name="title">标题</string>
     <string name="result_sum">共找到%s个结果</string>
     <string name="not_found">没有找到符合条件的书籍</string>
     <string name="login">登录</string>
-    <string name="user_name">用户名</string>
     <string name="password">密码</string>
-    
     <string name="mail">邮箱</string>
     <string name="card_id">证件号</string>
     <string name="bar_code">条码号</string>
     <string name="login_hint">证件号 / 邮箱</string>
-    <string name="scan_barcode">扫描条码</string>
-    <string name="click_here_to_search">点这里查找图书</string>
-    <string name="loading_top_keywords">正在载入热门检索词</string>
+    <string name="click_here_to_search">搜索爱看的书</string>
+
 </resources>

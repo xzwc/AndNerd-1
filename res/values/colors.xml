@@ -22,5 +22,6 @@
     <color name="asbestos">#ff7f8c8d</color>
     
     <color name="black">#ff222222</color>
-    <color name="transparent">#80000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffffff</color>
 </resources>

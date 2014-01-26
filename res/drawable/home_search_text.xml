@@ -4,4 +4,3 @@
     <item android:state_pressed="true" android:drawable="@drawable/home_search_text_pressed" />
     <item android:drawable="@drawable/home_search_text_normal" />
 </selector>
-

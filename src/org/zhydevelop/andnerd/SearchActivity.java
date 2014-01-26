@@ -92,7 +92,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 				return false;
 			}
 		});
-		
+
 		//关键字文本框
 		mTextKeyword = (EditText)findViewById(R.id.edit_keyword);
 		mTextKeyword.setImeActionLabel(getString(R.string.search), KeyEvent.KEYCODE_ENTER);
@@ -148,7 +148,8 @@ public class SearchActivity extends Activity implements OnClickListener {
 		//search books
 		mKeyword = getIntent().getStringExtra(EXTRA_KEYWORD);
 		mTextKeyword.setText(mKeyword);
-		load();
+		if(mKeyword != null && mKeyword.length() > 0)
+			load();
 	}
 
 	/**

@@ -7,7 +7,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:editTextStyle">@style/EditText</item>
         <item name="android:buttonStyle">@style/Button</item>
-        <item name="android:listSelector">@android:drawable/list_selector_background</item>
+        <item name="android:listSelector">@drawable/list_background</item>
     </style>
 
     <style name="SearchEdit" parent="@android:style/Widget.EditText">
@@ -28,7 +28,21 @@
     </style>
     
     <style name="HotKeyword" parent="@android:style/Widget.TextView">
-        <item name="android:textColor">@color/clouds</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/midnight_blue</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:indicatorLeft">10dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:shadowColor">@color/black</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+    </style>
+    <style name="SearchHint">
+        <item name="android:textColor">#ffaaaaaa</item>
+    </style>
+    
+    <style name="DetailedText" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/wet_asphalt</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

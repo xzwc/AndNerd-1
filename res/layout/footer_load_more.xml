@@ -11,7 +11,7 @@
         android:layout_below="@+id/progress_loading_list"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="@string/loading"
+        android:text="@string/please_input_keyword"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/asbestos" />
 
@@ -21,6 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
 </RelativeLayout>

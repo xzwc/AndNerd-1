@@ -70,9 +70,13 @@
         android:id="@+id/list_result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/transparent"
+        android:cacheColorHint="@color/transparent"
+        android:divider="@null"
         android:fastScrollEnabled="true"
+        tools:listfooter="@layout/listitem_book_search"
+        tools:listheader="@layout/header_search_list"
         tools:listitem="@layout/listitem_book_search" >
+
     </ListView>
 
 </LinearLayout>
