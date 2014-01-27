@@ -8,6 +8,8 @@
         <item name="android:editTextStyle">@style/EditText</item>
         <item name="android:buttonStyle">@style/Button</item>
         <item name="android:listSelector">@drawable/list_background</item>
+        <item name="android:indeterminateDrawable">@drawable/loading_anim</item>
+        
     </style>
 
     <style name="SearchEdit" parent="@android:style/Widget.EditText">
@@ -26,7 +28,7 @@
         <item name="android:textColor">#ff000000</item>
         <item name="android:background">@drawable/edit_text_light</item>
     </style>
-    
+
     <style name="HotKeyword" parent="@android:style/Widget.TextView">
         <item name="android:textColor">@color/midnight_blue</item>
         <item name="android:textSize">16sp</item>
@@ -37,12 +39,14 @@
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>
     </style>
+
     <style name="SearchHint">
         <item name="android:textColor">#ffaaaaaa</item>
     </style>
-    
+
     <style name="DetailedText" parent="android:Widget.TextView">
         <item name="android:textColor">@color/wet_asphalt</item>
         <item name="android:textSize">16sp</item>
     </style>
+    
 </resources>

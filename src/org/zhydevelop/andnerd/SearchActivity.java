@@ -35,10 +35,14 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+/**
+ * @author ChiChou, XZWC
+ * 搜索
+ */
 public class SearchActivity extends Activity implements OnClickListener {
 	//Intent相关常量
 	public static String EXTRA_KEYWORD = "keyword";
-	
+
 	//同时进行的HTTP请求数
 	public static int MAX_CONNECTIONS = 3;
 
@@ -152,7 +156,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 				Book book = (Book)l.getItemAtPosition(position);
 				if(book == null) return;
-				
+
 				//打开页面
 				Intent intent = new Intent(SearchActivity.this, BookDetailActivity.class);
 				Bundle bundle = new Bundle();
@@ -163,7 +167,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 				startActivity(intent);
 			}
 		});
-		
+
 		asyncHttpClient = new AsyncHttpClient();        
 		asyncHttpClient.setMaxConnections(MAX_CONNECTIONS);
 		//search books
@@ -209,10 +213,11 @@ public class SearchActivity extends Activity implements OnClickListener {
 
 		asyncHttpClient.get(SearchActivity.this, url, new AsyncHttpResponseHandler() {
 			@Override
-			public void onSuccess(String response) {		    	
+			public void onSuccess(String response) {
 				HuiwenParser parser = new HuiwenParser(response);
 				List<Book> result;
 				if(mPage == 1) {
+					//第一次搜索
 					mCount = parser.getCount();
 					if(mCount == 0) {
 						//TODO
@@ -224,9 +229,11 @@ public class SearchActivity extends Activity implements OnClickListener {
 					}					
 					mCountText.setText(String.format(getString(R.string.result_sum), mCount));
 				} else {
+					//翻页
 					result = parser.parseBooks();
 					mBooks.addAll(result);
 				}
+				//结束loading状态
 				mButtonSearch.setImageResource(R.drawable.ic_search);
 				mResultAdapter.notifyDataSetChanged();		    	
 				mLoadingIcon.setVisibility(View.GONE);

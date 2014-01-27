@@ -24,19 +24,19 @@ public class AmazonParser {
 			return null;
 
 		//解析ISBN
-		a = html.indexOf(ISBN_BEGIN);
+		a = html.indexOf(ISBN_BEGIN) + ISBN_BEGIN.length();
 		b = html.indexOf(ISBN_END, a);
-		ISBN = html.substring(a + ISBN_BEGIN.length(), b);
+		ISBN = html.substring(a, b);
 		
 		//解析链接
-		a = html.indexOf(ANCHOR_BEGIN, pos);
+		a = html.indexOf(ANCHOR_BEGIN, pos) + ANCHOR_BEGIN.length();
 		b = html.indexOf(ANCHOR_END, a);
-		url = html.substring(a + ANCHOR_BEGIN.length(), b);
+		url = html.substring(a, b);
 		
 		//解析图片链接
-		a = html.indexOf(IMAGE_BEGIN, b);
+		a = html.indexOf(IMAGE_BEGIN, b) + IMAGE_BEGIN.length();
 		b = html.indexOf(IMAGE_END, a);
-		image = html.substring(a + IMAGE_BEGIN.length(), b);
+		image = html.substring(a, b);
 		
 		return new AmazonItem(url, image, ISBN);
 	} 

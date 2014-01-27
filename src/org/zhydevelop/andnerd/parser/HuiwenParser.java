@@ -27,16 +27,26 @@ public class HuiwenParser {
 		this.content = content;
 	}
 
+	
+	/**
+	 * @param content 要操作的文本
+	 * @param begin 起始TAG
+	 * @param end 结束TAG
+	 * @return begin和end之间的字符，如果未找到，返回空字符
+	 */
+	private String extract(String content, String begin, String end) {
+		int a = content.indexOf(begin) + begin.length();
+		int b = content.indexOf(end, a);		
+		return a!= -1 && b != -1 ? content.substring(a, b) : "";
+	}
 	/**
 	 * @return 结果总数
 	 */
 	public int getCount() {
-		String TAG_START = "<strong class=\"red\">", TAG_END = "</strong>";
-		int start = content.indexOf(TAG_START) + TAG_START.length();
-		int end = content.indexOf(TAG_END, start);
+		String count = extract(content, "<strong class=\"red\">", "</strong>");
 
 		try {
-			return Integer.valueOf(content.substring(start, end));
+			return Integer.valueOf(count);
 		} catch (NumberFormatException e) {
 			return 0;
 		}		
@@ -113,23 +123,65 @@ public class HuiwenParser {
 		return keywords;
 	}
 
-
 	/**
 	 * @return
+	 * 解析单个项目页面
+	 * TODO:支持评论，相关推荐
 	 */
 	public Book detail() {
 		Book book = new Book();
 
-		//解析ISBN
-		//		String TAG_ISBN_OPEN = "http://book.douban.com/isbn/", TAG_ISBN_CLOSE = "/";
-		//		int pos = content.indexOf(TAG_ISBN_OPEN), a, b;
-		//		if(pos == -1) return null; //参数不正确		
-		//		a = pos + TAG_ISBN_OPEN.length();
-		//		b = content.indexOf(TAG_ISBN_CLOSE, a);
-		//		book.setISBN(Html.fromHtml(content.substring(a, b)).toString());
-		//		
-		//
+		//使用DOM解析文档
+		Document doc = Jsoup.parse(content);
+		int assigned = 0;
+		
+		//评分
+		String parts[] = doc.getElementById("score").html().split("star|\\.gif");
+		if(parts.length == 3) book.setScore(parts[1]);
 
-		return book;		
+		//MARC_NO
+		book.setId(doc.select("[name=marc_no]").val());
+		
+		//标题、出版社等
+		Elements elems = doc.select(".booklist");
+		String key, value;
+		for(Element e : elems) {
+			//是否解析完成
+			if(assigned >= 5) break;
+			
+			key = e.select("dt").html();
+			value = e.select("dd").text();
+			
+			if(key.startsWith("题名/责任者")) {
+				//标题和作者
+				parts = value.split("/");
+				if(parts.length == 2) {
+					book.setTitle(parts[0]);
+					book.setAuthor(parts[1]);
+					assigned += 2;
+				}
+			} else if(key.startsWith("出版发行项")) {
+				//出版社
+				book.setPublisher(value);
+				assigned++;
+			} else if(key.startsWith("ISBN及定价")) {
+				//ISBN
+				book.setISBN(value.split("/")[0]);
+				assigned++;
+			} else if(key.startsWith("提要文摘附注")) {
+				//摘要
+				book.setSummary(value);
+				assigned++;
+			}			
+			//TODO:评论
+		}
+		
+		//recycle
+		elems = null;
+		doc = null;
+		
+		//类别
+		book.setCategory(extract(content, "<dt class=\"grey\">文献类型：", "</dt"));
+		return book;	
 	}
 }

@@ -100,5 +100,15 @@ public class HuiwenURLBuilder {
 		return new StringBuilder(URL_READER).append("redr_verify.php").toString();
 	}
 
+	/**
+	 * @param id
+	 * @param rank
+	 * @return 执行评分URL
+	 */
+	public static String score(String id, int rank) {
+		if(rank < 0 || rank > 5) rank = 0;
+		return new StringBuilder(URL_OPAC).append("ajax_score_it.php?marc_no=")
+				.append("&rank=").append(rank).toString();
+	}
 	//TODO:登录后的功能
 }
