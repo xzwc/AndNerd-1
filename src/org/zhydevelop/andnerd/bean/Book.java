@@ -75,6 +75,7 @@ public class Book implements Serializable {
 	 public int getTotal() {
 		 return total;
 	 }
+	 
 	 /**
 	  * @param id the id to set
 	  */

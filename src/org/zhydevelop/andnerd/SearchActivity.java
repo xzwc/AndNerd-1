@@ -147,10 +147,10 @@ public class SearchActivity extends Activity implements OnClickListener {
 		mBooks = new ArrayList<Book>(mLimit);
 		mResultAdapter = new BookListAdapter(getApplication(), mBooks);
 		listView.setAdapter(mResultAdapter);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-				Book book = mResultAdapter.getItem(position);
+			public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+				Book book = (Book)l.getItemAtPosition(position);
 				if(book == null) return;
 				
 				//打开页面
